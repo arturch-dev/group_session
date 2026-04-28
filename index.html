@@ -485,8 +485,9 @@
 
   .timeline-row {
     display: grid;
+    /* Виправлення для мобілки: час і заголовок поряд, а текст на всю ширину знизу */
     grid-template-columns: 80px 1fr;
-    gap: 24px;
+    gap: 8px 24px; 
     padding: 32px 0;
     border-bottom: 1px solid var(--hairline);
     align-items: start;
@@ -494,6 +495,7 @@
 
   @media (min-width: 700px) {
     .timeline-row {
+      /* Повертаємо 3 колонки для комп'ютера */
       grid-template-columns: 120px 200px 1fr;
       gap: 40px;
       padding: 40px 0;
@@ -520,6 +522,17 @@
     font-size: 17px;
     line-height: 1.55;
     color: var(--text-primary);
+    /* На мобілці контент займає всю ширину (обидві колонки) */
+    grid-column: 1 / -1; 
+    margin-top: 12px;
+  }
+
+  @media (min-width: 700px) {
+    .timeline-content {
+      /* На десктопі контент займає свою законну 3-тю колонку */
+      grid-column: auto;
+      margin-top: 0;
+    }
   }
 
   .timeline-content strong {
@@ -630,19 +643,19 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at top right, rgba(232, 128, 74, 0.12), transparent 50%);
+    /* Легке затемнення знизу, щоб ім'я завжди читалось на будь-якому фото */
+    background: linear-gradient(to top, rgba(14, 11, 8, 0.85) 0%, transparent 40%),
+                radial-gradient(ellipse at top right, rgba(232, 128, 74, 0.12), transparent 50%);
+    z-index: 2;
   }
 
-  .coach-photo-placeholder {
+  .coach-img {
     position: absolute;
     inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    font-size: 13px;
-    text-align: center;
-    padding: 20px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
   }
 
   .coach-photo-name {
@@ -650,7 +663,8 @@
     font-size: 22px;
     font-weight: 500;
     position: relative;
-    z-index: 2;
+    z-index: 3; /* Поверх фото і градієнту */
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
   }
 
   .coach-bio h3 {
@@ -1334,9 +1348,12 @@
 
     <div class="coach-grid reveal">
       <div class="coach-photo">
-        <div class="coach-photo-placeholder">
-          [Фото Вови — спокійний кадр, бажано в теплому світлі. Може бути з кухні, з зошитом, на вулиці. Не "пацанський" знімок, а просто живий момент.]
-        </div>
+        
+        <!-- === ТУТ ТРЕБА ВСТАВИТИ ФОТО === -->
+        <!-- Заміни 'vova.jpg' на назву твого файлу (наприклад 'photo.png'). Файл має лежати в тій же папці, що і цей код -->
+        <img src="after2.jpg" alt="Володимир Гаврилюк" class="coach-img">
+        <!-- ============================== -->
+
         <div class="coach-photo-name">Володимир</div>
       </div>
 
@@ -1543,14 +1560,8 @@
     };
 
     try {
-      // ⚠️ ЗАМІНИ URL НА СВІЙ Google Apps Script Webhook URL
-      // Інструкція: https://script.google.com → New project → 
-      // function doPost(e) { var data = JSON.parse(e.postData.contents); SpreadsheetApp.openById('YOUR_SHEET_ID').getActiveSheet().appendRow([data.timestamp, data.name, data.contact, data.request, data.wantReview]); return ContentService.createTextOutput(JSON.stringify({status:'ok'})); }
-      // Deploy → as Web App → Execute as: Me → Access: Anyone
-
       const WEBHOOK_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
 
-      // Якщо webhook ще не налаштований — все одно показуємо успіх і ведемо в бота
       if (!WEBHOOK_URL.includes('YOUR_DEPLOYMENT_ID')) {
         await fetch(WEBHOOK_URL, {
           method: 'POST',
@@ -1558,18 +1569,15 @@
           body: JSON.stringify(data)
         });
       } else {
-        // Резерв: зберігаємо в localStorage до налаштування webhook
         const existing = JSON.parse(localStorage.getItem('signups') || '[]');
         existing.push(data);
         localStorage.setItem('signups', JSON.stringify(existing));
         console.log('Збережено локально:', data);
       }
 
-      // Show success
       document.getElementById('form-view').style.display = 'none';
       document.getElementById('success-view').style.display = 'block';
 
-      // Auto-redirect to bot after 3 seconds
       setTimeout(() => {
         window.location.href = document.getElementById('botLink').href;
       }, 3000);

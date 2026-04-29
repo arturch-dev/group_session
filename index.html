@@ -5,13 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Туди йду чи ні? — Відкритий розбір з коучем Володимиром Гаврилюком</title>
 <meta name="description" content="90-хвилинний живий розбір по методу IKIGAI з коучем Володимиром Гаврилюком. Безкоштовно. Для тих, хто заробляє, але всередині щось не клеїться.">
-<meta property="og:title" content="Туди йду чи ні? — Відкритий розбір з коучем">
-<meta property="og:description" content="90-хвилинний живий розбір по методу IKIGAI. Безкоштовно. Онлайн.">
-<meta property="og:type" content="website">
 
+<!-- Підключення шрифтів -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Підключення стилів для телефону (Intl-Tel-Input) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'YOUR_PIXEL_ID'); // ЗАМІНИТИ НА СВІЙ ID ПІКСЕЛЯ
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
 
 <style>
   :root {
@@ -41,1089 +58,115 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Film grain texture overlay */
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
+    content: ''; position: fixed; inset: 0; z-index: 1; pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.06;
-    mix-blend-mode: overlay;
-  }
-
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 24px;
-    position: relative;
-    z-index: 2;
-  }
-
-  /* Headings */
-  h1, h2, h3, .display {
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    color: var(--text-primary);
-  }
-
-  /* === HERO === */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding: 80px 0 60px;
-    overflow: hidden;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    top: -10%;
-    right: -20%;
-    width: 70%;
-    height: 80%;
-    background: radial-gradient(circle, rgba(232, 128, 74, 0.15) 0%, rgba(232, 128, 74, 0.05) 35%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 60px;
-    align-items: center;
-    position: relative;
-    z-index: 2;
-  }
-
-  @media (min-width: 900px) {
-    .hero-grid { grid-template-columns: 1.4fr 1fr; gap: 80px; }
-  }
-
-  .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 13px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--accent);
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.1s;
-  }
-
-  .hero-eyebrow::before {
-    content: '';
-    width: 32px;
-    height: 1px;
-    background: var(--accent);
-  }
-
-  .hero h1 {
-    font-size: clamp(44px, 7vw, 84px);
-    margin-bottom: 28px;
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 0.25s;
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 400;
-  }
-
-  .hero-sub {
-    font-size: 19px;
-    line-height: 1.55;
-    color: var(--text-secondary);
-    margin-bottom: 40px;
-    max-width: 580px;
-    font-weight: 400;
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 0.4s;
-  }
-
-  .hero-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 28px;
-    margin-bottom: 48px;
-    padding: 24px 28px;
-    background: var(--bg-elevated);
-    border: 1px solid var(--hairline-strong);
-    border-radius: 6px;
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 0.55s;
-  }
-
-  .hero-meta-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .hero-meta-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  .hero-meta-value {
-    font-family: 'Fraunces', serif;
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--text-primary);
-  }
-
-  .hero-cta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    align-items: center;
-    opacity: 0;
-    animation: fadeUp 0.9s ease forwards 0.55s;
-  }
-
-  /* Buttons */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 18px 36px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    font-feature-settings: "ss01";
-  }
-
-  .btn-primary {
-    background: var(--accent);
-    color: var(--bg-deep);
-    box-shadow: 0 4px 24px rgba(232, 128, 74, 0.25), 0 0 0 1px rgba(232, 128, 74, 0.4) inset;
-  }
-
-  .btn-primary:hover {
-    background: #F08F58;
-    box-shadow: 0 6px 32px rgba(232, 128, 74, 0.4), 0 0 0 1px rgba(232, 128, 74, 0.5) inset;
-    transform: translateY(-1px);
-  }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--text-primary);
-    border: 1px solid var(--hairline-strong);
-  }
-
-  .btn-ghost:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .hero-spots {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  .hero-spots strong {
-    color: var(--accent);
-    font-weight: 600;
-  }
-
-  /* Hero visual side */
-  .hero-visual {
-    position: relative;
-    aspect-ratio: 4/5;
-    background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
-    border: 1px solid var(--hairline-strong);
-    border-radius: 6px;
-    padding: 36px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeUp 1s ease forwards 0.5s;
-  }
-
-  .hero-visual::before {
-    content: '';
-    position: absolute;
-    top: -30%;
-    left: -10%;
-    width: 80%;
-    height: 60%;
-    background: radial-gradient(circle, rgba(232, 128, 74, 0.18), transparent 70%);
-    pointer-events: none;
-  }
-
-  .visual-quote {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 22px;
-    line-height: 1.4;
-    color: var(--text-primary);
-    position: relative;
-    z-index: 2;
-  }
-
-  .visual-quote::before {
-    content: '"';
-    font-size: 80px;
-    color: var(--accent);
-    line-height: 0;
-    margin-right: 8px;
-    vertical-align: -20px;
-    font-style: normal;
-  }
-
-  /* Нове фото замість круглого аватара */
-  .visual-main-photo {
-    width: 100%;
-    flex-grow: 1; /* Змушує фото розтягнутись на весь вільний простір посередині */
-    min-height: 160px;
-    margin: 28px 0 24px;
-    border-radius: 6px;
-    overflow: hidden;
-    border: 1px solid var(--hairline-strong);
-    position: relative;
-    z-index: 2;
-  }
-
-  .visual-main-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .visual-attribution {
-    position: relative;
-    z-index: 2;
-    padding-top: 20px;
-    border-top: 1px solid var(--hairline);
-  }
-
-  .visual-name {
-    font-family: 'Fraunces', serif;
-    font-size: 17px;
-    font-weight: 500;
-  }
-
-  .visual-role {
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
-  /* === SECTIONS === */
-  section {
-    padding: 100px 0;
-    position: relative;
-  }
-
-  @media (min-width: 900px) {
-    section { padding: 130px 0; }
-  }
-
-  .section-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 12px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--accent);
-    margin-bottom: 24px;
-  }
-
-  .section-eyebrow::before {
-    content: '';
-    width: 28px;
-    height: 1px;
-    background: var(--accent);
-  }
-
-  .section-title {
-    font-size: clamp(34px, 5vw, 56px);
-    margin-bottom: 28px;
-    max-width: 800px;
-  }
-
-  .section-title em {
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 400;
-  }
-
-  .section-lead {
-    font-size: 19px;
-    line-height: 1.6;
-    color: var(--text-secondary);
-    max-width: 720px;
-    margin-bottom: 64px;
-  }
-
-  /* === FOR WHOM === */
-  .for-whom {
-    background: var(--bg-elevated);
-    position: relative;
-  }
-
-  .for-whom::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: var(--hairline-strong);
-  }
-
-  .whom-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  @media (min-width: 700px) {
-    .whom-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  .whom-card {
-    padding: 32px 28px;
-    background: var(--bg-card);
-    border: 1px solid var(--hairline);
-    border-radius: 6px;
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    transition: border-color 0.3s ease;
-  }
-
-  .whom-card:hover {
-    border-color: var(--accent-soft);
-  }
-
-  .whom-num {
-    font-family: 'Fraunces', serif;
-    font-size: 32px;
-    font-style: italic;
-    color: var(--accent);
-    line-height: 1;
-    flex-shrink: 0;
-    font-weight: 400;
-  }
-
-  .whom-text {
-    font-size: 16px;
-    line-height: 1.55;
-    color: var(--text-primary);
-  }
-
-  .whom-text strong {
-    color: var(--text-primary);
-    font-weight: 600;
-  }
-
-  /* === IKIGAI METHOD === */
-  .method-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 60px;
-    align-items: center;
-  }
-
-  @media (min-width: 900px) {
-    .method-grid { grid-template-columns: 1fr 1fr; gap: 100px; }
-  }
-
-  .method-text p {
-    font-size: 18px;
-    line-height: 1.7;
-    color: var(--text-secondary);
-    margin-bottom: 20px;
-  }
-
-  .method-text p strong {
-    color: var(--text-primary);
-    font-weight: 600;
-  }
-
-  .ikigai-diagram {
-    position: relative;
-    aspect-ratio: 1;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-
-  .ikigai-svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  /* === PROGRAM TIMELINE === */
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    position: relative;
-    border-top: 1px solid var(--hairline-strong);
-  }
-
-  .timeline-row {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 8px 24px; 
-    padding: 32px 0;
-    border-bottom: 1px solid var(--hairline);
-    align-items: start;
-  }
-
-  @media (min-width: 700px) {
-    .timeline-row {
-      grid-template-columns: 120px 200px 1fr;
-      gap: 40px;
-      padding: 40px 0;
-    }
-  }
-
-  .timeline-time {
-    font-family: 'Fraunces', serif;
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--accent);
-  }
-
-  .timeline-label {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-    font-weight: 500;
-    padding-top: 6px;
-  }
-
-  .timeline-content {
-    font-size: 17px;
-    line-height: 1.55;
-    color: var(--text-primary);
-    grid-column: 1 / -1; 
-    margin-top: 12px;
-  }
-
-  @media (min-width: 700px) {
-    .timeline-content {
-      grid-column: auto;
-      margin-top: 0;
-    }
-  }
-
-  .timeline-content strong {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 19px;
-    display: block;
-    margin-bottom: 6px;
-  }
-
-  /* === ANTI-BLOCK (NOT included) === */
-  .anti {
-    background: var(--bg-elevated);
-    position: relative;
-  }
-
-  .anti::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: var(--hairline-strong);
-  }
-
-  .anti-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    border-top: 1px solid var(--hairline);
-  }
-
-  @media (min-width: 700px) {
-    .anti-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border-left: 1px solid var(--hairline);
-    }
-  }
-
-  .anti-item {
-    padding: 32px 28px;
-    border-bottom: 1px solid var(--hairline);
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
-
-  @media (min-width: 700px) {
-    .anti-item {
-      border-right: 1px solid var(--hairline);
-    }
-  }
-
-  .anti-mark {
-    font-size: 20px;
-    color: var(--accent);
-    line-height: 1;
-    flex-shrink: 0;
-    margin-top: 4px;
-  }
-
-  .anti-text {
-    font-size: 16px;
-    line-height: 1.55;
-    color: var(--text-primary);
-  }
-
-  .anti-text strong {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 17px;
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  /* === COACH BIO === */
-  .coach {
-    position: relative;
-  }
-
-  .coach-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 60px;
-    align-items: start;
-  }
-
-  @media (min-width: 900px) {
-    .coach-grid {
-      grid-template-columns: 320px 1fr;
-      gap: 80px;
-    }
-  }
-
-  .coach-photo {
-    aspect-ratio: 4/5;
-    background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated));
-    border: 1px solid var(--hairline-strong);
-    border-radius: 6px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    padding: 32px;
-  }
-
-  .coach-photo::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(to top, rgba(14, 11, 8, 0.85) 0%, transparent 40%),
-                radial-gradient(ellipse at top right, rgba(232, 128, 74, 0.12), transparent 50%);
-    z-index: 2;
-  }
-
-  .coach-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-  }
-
-  .coach-photo-name {
-    font-family: 'Fraunces', serif;
-    font-size: 22px;
-    font-weight: 500;
-    position: relative;
-    z-index: 3; 
-    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-  }
-
-  .coach-bio h3 {
-    font-size: 28px;
-    margin-bottom: 24px;
-    line-height: 1.25;
-  }
-
-  .coach-bio p {
-    font-size: 17px;
-    line-height: 1.65;
-    color: var(--text-secondary);
-    margin-bottom: 18px;
-  }
-
-  .coach-bio p strong {
-    color: var(--text-primary);
-    font-weight: 600;
-  }
-
-  .coach-facts {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 36px;
-    padding-top: 32px;
-    border-top: 1px solid var(--hairline);
-  }
-
-  @media (min-width: 600px) {
-    .coach-facts { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  .coach-fact-num {
-    font-family: 'Fraunces', serif;
-    font-size: 36px;
-    color: var(--accent);
-    font-weight: 500;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .coach-fact-label {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.4;
-  }
-
-  .coach-quote {
-    margin-top: 36px;
-    padding: 28px 32px;
-    background: var(--bg-card);
-    border-left: 3px solid var(--accent);
-    border-radius: 0 4px 4px 0;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 19px;
-    line-height: 1.5;
-    color: var(--text-primary);
-  }
-
-  /* === BONUS === */
-  .bonus {
-    background: var(--bg-elevated);
-    position: relative;
-  }
-
-  .bonus::before, .bonus::after {
-    content: '';
-    position: absolute;
-    left: 0; right: 0;
-    height: 1px;
-    background: var(--hairline-strong);
-  }
-  .bonus::before { top: 0; }
-  .bonus::after { bottom: 0; }
-
-  .bonus-card {
-    background: var(--bg-card);
-    border: 1px solid var(--hairline-strong);
-    border-radius: 8px;
-    padding: 48px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  @media (min-width: 800px) {
-    .bonus-card { grid-template-columns: 1fr auto; gap: 60px; padding: 56px 60px; }
-  }
-
-  .bonus-card::before {
-    content: '';
-    position: absolute;
-    top: -50%; right: -10%;
-    width: 50%; height: 100%;
-    background: radial-gradient(circle, rgba(232, 128, 74, 0.1), transparent 60%);
-    pointer-events: none;
-  }
-
-  .bonus-card-content { position: relative; z-index: 2; }
-
-  .bonus-card h3 {
-    font-size: 30px;
-    margin-bottom: 20px;
-  }
-
-  .bonus-card p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--text-secondary);
-    margin-bottom: 16px;
-  }
-
-  .bonus-list {
-    list-style: none;
-    margin-top: 24px;
-  }
-
-  .bonus-list li {
-    padding-left: 28px;
-    position: relative;
-    font-size: 15px;
-    color: var(--text-primary);
-    margin-bottom: 12px;
-    line-height: 1.5;
-  }
-
-  .bonus-list li::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 10px;
-    width: 16px; height: 1px;
-    background: var(--accent);
-  }
-
-  .bonus-icon {
-    width: 120px; height: 120px;
-    border: 1px solid var(--hairline-strong);
-    border-radius: 8px;
-    background: var(--bg-deep);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 2;
-  }
-
-  /* === FAQ === */
-  .faq-list {
-    border-top: 1px solid var(--hairline-strong);
-  }
-
-  details {
-    border-bottom: 1px solid var(--hairline);
-    transition: background 0.3s ease;
-  }
-
-  details[open] {
-    background: var(--bg-elevated);
-  }
-
-  summary {
-    padding: 28px 0;
-    cursor: pointer;
-    font-family: 'Fraunces', serif;
-    font-size: 21px;
-    font-weight: 500;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-    transition: color 0.3s ease;
-  }
-
-  summary::-webkit-details-marker { display: none; }
-
-  summary:hover { color: var(--accent); }
-
-  details[open] summary { color: var(--accent); }
-
-  .faq-icon {
-    width: 24px; height: 24px;
-    flex-shrink: 0;
-    position: relative;
-    transition: transform 0.3s ease;
-  }
-
-  .faq-icon::before, .faq-icon::after {
-    content: '';
-    position: absolute;
-    background: currentColor;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease;
-  }
-
-  .faq-icon::before { width: 14px; height: 1px; }
-  .faq-icon::after { width: 1px; height: 14px; }
-
-  details[open] .faq-icon::after { opacity: 0; }
-
-  details[open] summary {
-    padding-left: 24px;
-  }
-
-  .faq-content {
-    padding: 0 0 28px 0;
-    font-size: 16px;
-    line-height: 1.65;
-    color: var(--text-secondary);
-    max-width: 780px;
-  }
-
-  details[open] .faq-content { padding-left: 24px; }
-
-  /* === FINAL CTA === */
-  .final {
-    text-align: center;
-    padding: 140px 0;
-    position: relative;
-  }
-
-  .final::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--hairline-strong), transparent);
-  }
-
-  .final::after {
-    content: '';
-    position: absolute;
-    top: 20%; left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 60%;
-    background: radial-gradient(ellipse, rgba(232, 128, 74, 0.08), transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .final-content { position: relative; z-index: 2; }
-
-  .final h2 {
-    font-size: clamp(42px, 6vw, 72px);
-    margin-bottom: 32px;
-    max-width: 900px;
-    margin-left: auto; margin-right: auto;
-  }
-
+    opacity: 0.06; mix-blend-mode: overlay;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  h1, h2, h3, .display { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; color: var(--text-primary); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; position: relative; padding: 80px 0 60px; overflow: hidden; }
+  .hero::after { content: ''; position: absolute; top: -10%; right: -20%; width: 70%; height: 80%; background: radial-gradient(circle, rgba(232, 128, 74, 0.15) 0%, rgba(232, 128, 74, 0.05) 35%, transparent 70%); pointer-events: none; z-index: 0; }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
+  @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.4fr 1fr; gap: 80px; } }
+
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); margin-bottom: 32px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.1s; }
+  .hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+  .hero h1 { font-size: clamp(44px, 7vw, 84px); margin-bottom: 28px; opacity: 0; animation: fadeUp 0.9s ease forwards 0.25s; }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .hero-sub { font-size: 19px; line-height: 1.55; color: var(--text-secondary); margin-bottom: 40px; max-width: 580px; font-weight: 400; opacity: 0; animation: fadeUp 0.9s ease forwards 0.4s; }
+  .hero-cta-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; opacity: 0; animation: fadeUp 0.9s ease forwards 0.55s; }
+
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 36px; font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.02em; border-radius: 4px; border: none; cursor: pointer; transition: all 0.3s ease; text-decoration: none; }
+  .btn-primary { background: var(--accent); color: var(--bg-deep); box-shadow: 0 4px 24px rgba(232, 128, 74, 0.25), 0 0 0 1px rgba(232, 128, 74, 0.4) inset; }
+  .btn-primary:hover { background: #F08F58; box-shadow: 0 6px 32px rgba(232, 128, 74, 0.4), 0 0 0 1px rgba(232, 128, 74, 0.5) inset; transform: translateY(-1px); }
+  .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+  .hero-spots { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+  .hero-spots strong { color: var(--accent); font-weight: 600; }
+
+  /* ВИПРАВЛЕННЯ БАГУ ДЛЯ МОБІЛЬНОЇ ВЕРСІЇ */
+  .hero-visual { position: relative; height: auto; min-height: 480px; background: linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-card) 100%); border: 1px solid var(--hairline-strong); border-radius: 6px; padding: 36px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; opacity: 0; animation: fadeUp 1s ease forwards 0.5s; }
+  @media (min-width: 900px) { .hero-visual { aspect-ratio: 4/5; min-height: auto; } }
+  .hero-visual::before { content: ''; position: absolute; top: -30%; left: -10%; width: 80%; height: 60%; background: radial-gradient(circle, rgba(232, 128, 74, 0.18), transparent 70%); pointer-events: none; }
+  .visual-quote { font-family: 'Fraunces', serif; font-style: italic; font-size: 22px; line-height: 1.4; color: var(--text-primary); position: relative; z-index: 2; }
+  .visual-quote::before { content: '"'; font-size: 80px; color: var(--accent); line-height: 0; margin-right: 8px; vertical-align: -20px; font-style: normal; }
+  .visual-main-photo { width: 100%; flex-grow: 1; min-height: 160px; margin: 28px 0 24px; border-radius: 6px; overflow: hidden; border: 1px solid var(--hairline-strong); position: relative; z-index: 2; }
+  .visual-main-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .visual-attribution { position: relative; z-index: 2; padding-top: 20px; border-top: 1px solid var(--hairline); }
+  .visual-name { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 500; }
+  .visual-role { font-size: 13px; color: var(--text-muted); }
+
+  /* SECTIONS */
+  section { padding: 100px 0; position: relative; }
+  @media (min-width: 900px) { section { padding: 130px 0; } }
+  .section-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); margin-bottom: 24px; }
+  .section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+  .section-title { font-size: clamp(34px, 5vw, 56px); margin-bottom: 28px; max-width: 800px; }
+  .section-title em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .section-lead { font-size: 19px; line-height: 1.6; color: var(--text-secondary); max-width: 720px; margin-bottom: 64px; }
+
+  /* FOR WHOM */
+  .for-whom { background: var(--bg-elevated); position: relative; border-top: 1px solid var(--hairline-strong); }
+  .whom-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 700px) { .whom-grid { grid-template-columns: repeat(2, 1fr); } }
+  .whom-card { padding: 32px 28px; background: var(--bg-card); border: 1px solid var(--hairline); border-radius: 6px; display: flex; gap: 20px; align-items: flex-start; transition: border-color 0.3s ease; }
+  .whom-card:hover { border-color: var(--accent-soft); }
+  .whom-num { font-family: 'Fraunces', serif; font-size: 32px; font-style: italic; color: var(--accent); line-height: 1; flex-shrink: 0; font-weight: 400; }
+  .whom-text { font-size: 16px; line-height: 1.55; color: var(--text-primary); }
+  .whom-text strong { color: var(--text-primary); font-weight: 600; }
+
+  /* FINAL CTA */
+  .final { text-align: center; padding: 140px 0; position: relative; }
+  .final::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60%; height: 1px; background: linear-gradient(90deg, transparent, var(--hairline-strong), transparent); }
+  .final h2 { font-size: clamp(42px, 6vw, 72px); margin-bottom: 32px; max-width: 900px; margin-left: auto; margin-right: auto; }
   .final h2 em { color: var(--accent); font-style: italic; font-weight: 400; }
+  .final p { font-size: 18px; color: var(--text-secondary); max-width: 580px; margin: 0 auto 48px; line-height: 1.6; }
 
-  .final p {
-    font-size: 18px;
-    color: var(--text-secondary);
-    max-width: 580px;
-    margin: 0 auto 48px;
-    line-height: 1.6;
-  }
-
-  .final .btn-primary { padding: 22px 48px; font-size: 16px; }
-
-  /* === FOOTER === */
-  footer {
-    padding: 40px 0;
-    border-top: 1px solid var(--hairline);
-    text-align: center;
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
+  /* FOOTER */
+  footer { padding: 40px 0; border-top: 1px solid var(--hairline); text-align: center; font-size: 13px; color: var(--text-muted); }
   footer a { color: var(--accent); text-decoration: none; }
 
-  /* === MODAL === */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(14, 11, 8, 0.85);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 100;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    animation: fadeIn 0.3s ease;
-  }
-
+  /* MODAL & FORMS */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(14, 11, 8, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 100; display: none; align-items: center; justify-content: center; padding: 20px; animation: fadeIn 0.3s ease; }
   .modal-overlay.active { display: flex; }
-
-  .modal {
-    background: var(--bg-elevated);
-    border: 1px solid var(--hairline-strong);
-    border-radius: 8px;
-    max-width: 540px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    padding: 48px 40px;
-    position: relative;
-    animation: slideUp 0.4s ease;
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 20px; right: 20px;
-    width: 32px; height: 32px;
-    background: transparent;
-    border: 1px solid var(--hairline);
-    color: var(--text-secondary);
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    transition: all 0.2s ease;
-  }
-
-  .modal-close:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .modal h3 {
-    font-size: 28px;
-    margin-bottom: 12px;
-    line-height: 1.2;
-  }
-
-  .modal-sub {
-    font-size: 15px;
-    color: var(--text-secondary);
-    margin-bottom: 32px;
-    line-height: 1.5;
-  }
-
-  .form-group { margin-bottom: 20px; }
-
-  .form-label {
-    display: block;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
-    letter-spacing: 0.02em;
-  }
-
-  .form-input, .form-textarea {
-    width: 100%;
-    background: var(--bg-deep);
-    border: 1px solid var(--hairline-strong);
-    border-radius: 4px;
-    padding: 14px 16px;
-    color: var(--text-primary);
-    font-family: 'Manrope', sans-serif;
-    font-size: 15px;
-    transition: border-color 0.2s ease;
-    font-weight: 400;
-  }
-
-  .form-input:focus, .form-textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
-
+  .modal { background: var(--bg-elevated); border: 1px solid var(--hairline-strong); border-radius: 8px; max-width: 540px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 48px 40px; position: relative; animation: slideUp 0.4s ease; }
+  .modal-close { position: absolute; top: 20px; right: 20px; width: 32px; height: 32px; background: transparent; border: 1px solid var(--hairline); color: var(--text-secondary); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: all 0.2s ease; }
+  .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+  .modal h3 { font-size: 28px; margin-bottom: 12px; line-height: 1.2; }
+  .modal-sub { font-size: 15px; color: var(--text-secondary); margin-bottom: 32px; line-height: 1.5; }
+  
+  .form-group { margin-bottom: 20px; position: relative; }
+  .form-label { display: block; font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; letter-spacing: 0.02em; }
+  .form-input, .form-textarea { width: 100%; background: var(--bg-deep); border: 1px solid var(--hairline-strong); border-radius: 4px; padding: 14px 16px; color: var(--text-primary); font-family: 'Manrope', sans-serif; font-size: 15px; transition: border-color 0.2s ease; font-weight: 400; }
+  .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--accent); }
   .form-textarea { resize: vertical; min-height: 100px; }
+  
+  /* СТИЛІ ДЛЯ ТЕЛЕФОНУ INTL-TEL-INPUT */
+  .iti { width: 100%; display: block; }
+  .iti__country-list { background-color: var(--bg-elevated); border: 1px solid var(--hairline-strong); color: var(--text-primary); font-family: 'Manrope', sans-serif; border-radius: 4px; }
+  .iti__country.iti__highlight { background-color: var(--bg-card); }
+  .iti__selected-dial-code { color: var(--text-primary); }
+  .form-error { color: #E8804A; font-size: 12px; margin-top: 6px; display: none; }
+  .input-error { border-color: #E8804A !important; }
 
-  .form-checkbox-row {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    padding: 16px 0;
-  }
+  .form-checkbox-row { display: flex; gap: 12px; align-items: flex-start; padding: 16px 0; }
+  .form-checkbox { width: 18px; height: 18px; accent-color: var(--accent); flex-shrink: 0; margin-top: 2px; cursor: pointer; }
+  .form-checkbox-label { font-size: 14px; color: var(--text-secondary); line-height: 1.5; cursor: pointer; }
 
-  .form-checkbox {
-    width: 18px; height: 18px;
-    accent-color: var(--accent);
-    flex-shrink: 0;
-    margin-top: 2px;
-    cursor: pointer;
-  }
-
-  .form-checkbox-label {
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.5;
-    cursor: pointer;
-  }
-
-  .form-submit {
-    width: 100%;
-    margin-top: 12px;
-  }
-
-  .modal-success {
-    text-align: center;
-    padding: 20px 0;
-  }
-
-  .modal-success-icon {
-    width: 64px; height: 64px;
-    border: 2px solid var(--accent);
-    border-radius: 50%;
-    margin: 0 auto 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--accent);
-    font-size: 28px;
-  }
-
-  .modal-success h3 { margin-bottom: 16px; }
-
-  .modal-success p {
-    color: var(--text-secondary);
-    margin-bottom: 32px;
-    line-height: 1.6;
-    font-size: 15px;
-  }
-
-  /* === ANIMATIONS === */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Scroll reveal */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- ====== HERO ====== -->
 <section class="hero">
   <div class="container">
     <div class="hero-grid">
@@ -1139,7 +182,7 @@
             Зареєструватись на розбір
             <span style="font-size:18px; line-height:1;">→</span>
           </button>
-          <span class="hero-spots">Залишилось <strong id="spots-1">37</strong> з 50 місць</span>
+          <span class="hero-spots">Залишилось <strong>37</strong> з 50 місць</span>
         </div>
       </div>
 
@@ -1147,14 +190,9 @@
         <div class="visual-quote">
           Я завжди знав, що в мені є сила. Але роками не міг її розкрити — бо не вмів сформулювати, куди вона має йти.
         </div>
-        
-        <!-- === ТУТ ВСТАВЛЯЙ ФОТО ДЛЯ БЛОКУ З ЦИТАТОЮ === -->
-        <!-- Заміни 'avatar.jpg' на назву твого файлу -->
         <div class="visual-main-photo">
-          <img src="author.jfif" alt="Володимир Гаврилюк">
+          <img src="author.jfif" alt="Володимир Гаврилюк" loading="lazy">
         </div>
-        <!-- ============================================== -->
-
         <div class="visual-attribution">
           <div>
             <div class="visual-name">Володимир Гаврилюк</div>
@@ -1166,309 +204,33 @@
   </div>
 </section>
 
-<!-- ====== FOR WHOM ====== -->
 <section class="for-whom">
   <div class="container">
     <div class="reveal">
       <div class="section-eyebrow">Для кого це</div>
       <h2 class="section-title">Це для тебе, якщо <em>впізнаєш</em> себе</h2>
       <p class="section-lead">
-        Це не про "знайти своє покликання з нуля". Це про чесний аудит того, що ти вже маєш — і де у твоєму житті утворився розрив між тим, що ти робиш, і тим, що дає тобі сенс.
+        Це не про "знайти своє покликання з нуля". Це про чесний аудит того, що ти вже маєш.
       </p>
     </div>
-
     <div class="whom-grid reveal">
       <div class="whom-card">
         <span class="whom-num">01</span>
-        <p class="whom-text">Ти <strong>заробляєш онлайн</strong> або в найму, маєш стабільний дохід — але прокидаєшся з думкою "ще один день", а не "класно, що я роблю".</p>
+        <p class="whom-text">Ти <strong>заробляєш онлайн</strong> або в найму, але прокидаєшся з думкою "ще один день".</p>
       </div>
       <div class="whom-card">
         <span class="whom-num">02</span>
-        <p class="whom-text">Ти будуєш <strong>свій бізнес або проект</strong>, але між метою і відчуттям сенсу — порожнеча. Працюєш більше, а легше не стає.</p>
-      </div>
-      <div class="whom-card">
-        <span class="whom-num">03</span>
-        <p class="whom-text">Ти знаєш, що <strong>здатний на більше</strong> — але кожного року просто "трохи краще, ніж минулого". Не стрибок, не прорив.</p>
-      </div>
-      <div class="whom-card">
-        <span class="whom-num">04</span>
-        <p class="whom-text">Ти пробував різні курси, інструменти, підходи — <strong>і нічого по-справжньому не клацнуло</strong>. Шукаєш не ще один курс, а ясність.</p>
+        <p class="whom-text">Ти будуєш <strong>свій бізнес</strong>, але між метою і відчуттям сенсу — порожнеча.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ====== METHOD ====== -->
-<section>
-  <div class="container">
-    <div class="method-grid">
-      <div class="reveal">
-        <div class="section-eyebrow">Метод</div>
-        <h2 class="section-title">Чому саме <em>IKIGAI</em></h2>
-        <div class="method-text">
-          <p>IKIGAI — японське слово. Означає "те, заради чого варто прокидатися вранці". Звучить пафосно — але інструмент <strong>дуже практичний</strong>.</p>
-          <p>Це таблиця з чотирьох кіл. На пересіченнях видно, де у тебе сила, а де — розрив. Не теорія, не езотерика. <strong>Карта твого життя</strong>, заповнена твоєю рукою.</p>
-          <p>Я використав її у 27 років, коли працював на кухні. Побачив, що моя робота потрапляє лише в одне коло — "за що платять". В інших трьох — порожньо. Це і був мій момент <em>"я не туди"</em>.</p>
-          <p>На ефірі ти заповниш свою таблицю разом зі мною. Дивитимешся на неї — і побачиш своє чесно.</p>
-        </div>
-      </div>
-
-      <div class="ikigai-diagram reveal">
-        <svg class="ikigai-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#E8804A" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#E8804A" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
-          <rect width="400" height="400" fill="url(#bgGlow)"/>
-
-          <!-- 4 circles -->
-          <circle cx="160" cy="160" r="105" fill="rgba(232,128,74,0.08)" stroke="#E8804A" stroke-width="1" opacity="0.7"/>
-          <circle cx="240" cy="160" r="105" fill="rgba(232,128,74,0.08)" stroke="#E8804A" stroke-width="1" opacity="0.7"/>
-          <circle cx="160" cy="240" r="105" fill="rgba(232,128,74,0.08)" stroke="#E8804A" stroke-width="1" opacity="0.7"/>
-          <circle cx="240" cy="240" r="105" fill="rgba(232,128,74,0.08)" stroke="#E8804A" stroke-width="1" opacity="0.7"/>
-
-          <!-- Labels -->
-          <text x="80" y="78" fill="#F5EDE0" font-family="Fraunces, serif" font-size="14" font-style="italic" text-anchor="middle">що ти любиш</text>
-          <text x="320" y="78" fill="#F5EDE0" font-family="Fraunces, serif" font-size="14" font-style="italic" text-anchor="middle">що ти вмієш</text>
-          <text x="80" y="335" fill="#F5EDE0" font-family="Fraunces, serif" font-size="14" font-style="italic" text-anchor="middle">за що платять</text>
-          <text x="320" y="335" fill="#F5EDE0" font-family="Fraunces, serif" font-size="14" font-style="italic" text-anchor="middle">що потрібно світу</text>
-
-          <!-- Center IKIGAI -->
-          <circle cx="200" cy="200" r="36" fill="#E8804A" opacity="0.95"/>
-          <text x="200" y="206" fill="#0E0B08" font-family="Fraunces, serif" font-size="16" font-weight="600" text-anchor="middle" letter-spacing="2">IKIGAI</text>
-        </svg>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== PROGRAM ====== -->
-<section class="for-whom">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-eyebrow">Програма ефіру</div>
-      <h2 class="section-title">Що буде на <em>розборі</em></h2>
-      <p class="section-lead">
-        90 хвилин, чітко по таймінгу. Без "води" і без переходів між темами без логіки. Усе для того, щоб ти пішов з конкретним розумінням — а не з "цікаво, треба подумати".
-      </p>
-    </div>
-
-    <div class="timeline reveal">
-      <div class="timeline-row">
-        <div class="timeline-time">0–25</div>
-        <div class="timeline-label">Лекційна частина</div>
-        <div class="timeline-content">
-          <strong>IKIGAI як інструмент, не як японська філософія</strong>
-          Розбираю на своєму прикладі — як я використав цю таблицю, щоб побачити, чому 10 років на кухні відчувались "не туди". Без езотерики, з конкретикою.
-        </div>
-      </div>
-
-      <div class="timeline-row">
-        <div class="timeline-time">25–35</div>
-        <div class="timeline-label">Самостійна робота</div>
-        <div class="timeline-content">
-          <strong>Заповнюєш свою таблицю</strong>
-          Ти отримаєш шаблон до ефіру. На цьому етапі заповнюєш його разом зі мною — я веду питаннями, ти пишеш чесно. Без оцінки, без "як треба".
-        </div>
-      </div>
-
-      <div class="timeline-row">
-        <div class="timeline-time">35–75</div>
-        <div class="timeline-label">Живі розбори</div>
-        <div class="timeline-content">
-          <strong>2 учасники отримають індивідуальний розбір зі мною</strong>
-          Кожен — по 15-17 хвилин у прямому ефірі. Ти спостерігаєш, як коучингові питання виявляють те, що людина роками не могла побачити сама. Це — найцінніша частина.
-        </div>
-      </div>
-
-      <div class="timeline-row">
-        <div class="timeline-time">75–90</div>
-        <div class="timeline-label">Q&A</div>
-        <div class="timeline-content">
-          <strong>Відповіді на запитання</strong>
-          Час, щоб поставити будь-які питання — про свою ситуацію, про інструмент, про те, що почув на розборі. Без поспіху.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== ANTI-BLOCK ====== -->
-<section class="anti">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-eyebrow">Чесно</div>
-      <h2 class="section-title">Чого <em>не буде</em> на ефірі</h2>
-      <p class="section-lead">
-        Я знаю, як виглядають "відкриті розбори" в інтернеті. Тому одразу скажу, чого ти від мене точно не отримаєш.
-      </p>
-    </div>
-
-    <div class="anti-grid reveal">
-      <div class="anti-item">
-        <span class="anti-mark">×</span>
-        <div class="anti-text">
-          <strong>Не буде продажу нічого</strong>
-          Я не буду пропонувати тобі купити курс, програму чи послугу. Цей розбір — окрема історія, без апсейлів і "спецпропозицій тільки сьогодні".
-        </div>
-      </div>
-
-      <div class="anti-item">
-        <span class="anti-mark">×</span>
-        <div class="anti-text">
-          <strong>Не буде countdown-таймерів</strong>
-          Ніяких "купи зараз або кнопка зникне через 3 години". Якщо щось має сенс — воно матиме сенс і завтра.
-        </div>
-      </div>
-
-      <div class="anti-item">
-        <span class="anti-mark">×</span>
-        <div class="anti-text">
-          <strong>Не буде "успішного успіху"</strong>
-          Я не буду розказувати, як заробити мільйон за 30 днів. Не моя тема. У мене тема — як перестати йти не туди.
-        </div>
-      </div>
-
-      <div class="anti-item">
-        <span class="anti-mark">×</span>
-        <div class="anti-text">
-          <strong>Не буде тиску і "магії"</strong>
-          Ти не вийдеш з ефіру з відчуттям "я нарешті знайшов сенс життя!". Ти вийдеш з конкретним розумінням, де твоя точка А — і яка наступна дія.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== COACH ====== -->
-<section class="coach">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-eyebrow">Хто веде</div>
-      <h2 class="section-title">Володимир <em>Гаврилюк</em></h2>
-    </div>
-
-    <div class="coach-grid reveal">
-      <div class="coach-photo">
-        
-        <!-- === ТУТ ТРЕБА ВСТАВИТИ ФОТО === -->
-        <img src="after2.jpg" alt="Володимир Гаврилюк" class="coach-img">
-        <!-- ============================== -->
-
-        <div class="coach-photo-name"></div>
-      </div>
-
-      <div class="coach-bio">
-        <h3>10 років на кухні. 6 років тверезості. Шлях, через який я можу бути поряд, коли ти проходиш свій.</h3>
-
-        <p>З 18 до 28 я працював поваром — у Рівному, Луцьку, Польщі, Словаччині. Десять років підйомів о 6:30 на дев'яту на зміну. Десять років важкої залежності, з якої вибрався сам у 28.</p>
-
-        <p>Точку Б побачив, коли вперше сів і чесно заповнив свій IKIGAI. Не "як треба", а як є. Виявилось, що те, що я вважав своєю слабкістю — чути людей, відчувати їх — це і було серцем мого <strong>"що я вмію"</strong>. З цього виріс коучинг.</p>
-
-        <p>Зараз я <strong>сертифікований коуч ICF</strong>, працюю переважно з підприємцями і людьми, які заробляють онлайн. Допомагаю не "знайти себе" — а побачити, де у твоєму вже існуючому житті розрив. І що з цим робити в понеділок.</p>
-
-        <div class="coach-facts">
-          <div>
-            <div class="coach-fact-num">ICF</div>
-            <div class="coach-fact-label">Сертифікація International Coaching Federation</div>
-          </div>
-          <div>
-            <div class="coach-fact-num">40+</div>
-            <div class="coach-fact-label">Проведених коучингових сесій</div>
-          </div>
-          <div>
-            <div class="coach-fact-num">6</div>
-            <div class="coach-fact-label">Місяців навчання в школі ICF</div>
-          </div>
-          <div>
-            <div class="coach-fact-num">9К+</div>
-            <div class="coach-fact-label">Підписників в Instagram</div>
-          </div>
-        </div>
-
-        <div class="coach-quote">
-          Я не вірю в універсальні відповіді. Вірю в правильні питання — і в тиху, спокійну роботу зі своєю чесністю.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====== FAQ ====== -->
-<section>
-  <div class="container">
-    <div class="reveal">
-      <div class="section-eyebrow">Часті запитання</div>
-      <h2 class="section-title">Ти <em>сумніваєшся</em> — і це нормально</h2>
-      <p class="section-lead">
-        Ось що питають частіше за все. Якщо твого питання тут немає — пиши IKIGAI в директ Instagram, я відповім особисто.
-      </p>
-    </div>
-
-    <div class="faq-list reveal">
-      <details>
-        <summary>А раптом мене викличуть на розбір, і я не знатиму, що сказати? <span class="faq-icon"></span></summary>
-        <div class="faq-content">
-          На публічний розбір потраплять тільки ті, хто сам подав заявку зі своїм запитом. Якщо ти не подавав — ти просто слухач. Ніхто тебе "не випалить" і не покличе зненацька. Ти можеш приходити з вимкненою камерою, з мовчазним мікрофоном — як зручно.
-        </div>
-      </details>
-
-      <details>
-        <summary>Я не зрозумію цього вашого IKIGAI? <span class="faq-icon"></span></summary>
-        <div class="faq-content">
-          Це не складна теорія. Це таблиця з 4 кіл, яку розуміє дитина. Складність — не в інструменті, а в тому, щоб дати собі чесні відповіді. На ефірі я веду тебе питаннями, на які ти точно зможеш відповісти. Просто потрібно бути чесним із собою.
-        </div>
-      </details>
-
-      <details>
-        <summary>Це безкоштовно — а в чому підступ? <span class="faq-icon"></span></summary>
-        <div class="faq-content">
-          Підступу немає. Я не продаю на цьому ефірі курс — це чесно прописано в програмі. Чому я роблю безкоштовно? Тому що це новий формат для мене, я хочу обкатати його, отримати реальні запити людей, і зробити перші публічні розбори — щоб ця історія жила. Ти отримаєш цінність, я — досвід і живі кейси. Чесний обмін.
-        </div>
-      </details>
-
-      <details>
-        <summary>Я не підприємець, я в найму. Мені підійде? <span class="faq-icon"></span></summary>
-        <div class="faq-content">
-          Так, якщо у тебе є відчуття "не туди" — підійде. IKIGAI працює однаково і для підприємця, і для найманого працівника. Більшість моїх клієнтів — люди, які заробляють (онлайн, в найму, фрілансом, у бізнесі), мають базовий дохід, але внутрішньо відчувають, що йдуть не своїм шляхом. Якщо ти впізнав себе у блоці "це для тебе, якщо…" — приходь.
-        </div>
-      </details>
-
-      <details>
-        <summary>А якщо я зрозумію, що багато років займаюсь не тим — що тоді? <span class="faq-icon"></span></summary>
-        <div class="faq-content">
-          Це найчесніший і найскладніший страх. І саме тому варто прийти. Тому що це розуміння так чи інакше прийде — питання тільки в тому, чи прийде воно через 5 років, коли вже значно складніше щось міняти, чи прийде зараз, коли є енергія і час щось зробити. На ефірі ти не лишишся з цим один — я даю інструмент і конкретний наступний крок. Не "знайди сенс життя за 90 хвилин", а "побач реальну точку А і прийми перше рішення".
-        </div>
-      </details>
-
-      <details>
-        <summary>Що буде після ефіру? <span class="faq-icon"></span></summary>
-        <div class="faq-content">
-          Після ефіру ти отримаєш запис — щоб мати можливість повернутись до матеріалу будь-коли. Якщо за час ефіру ти відчуєш, що хотів би продовжити роботу зі мною персонально — ми завжди можемо знайти формат, який тобі підійде. Але це окрема розмова, не пов'язана з самим розбором.
-        </div>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ====== FINAL CTA ====== -->
 <section class="final">
   <div class="container">
-    <div class="final-content">
-      <h2>Якщо ти прочитав до кінця — <em>ти знаєш</em>, навіщо тобі це</h2>
-      <p>
-        90 хвилин, які можуть нічого не змінити — або повернути тобі зруйнований за роки контакт із самим собою.
-      </p>
-      <button class="btn btn-primary" onclick="openModal()">
-        Зареєструватись на розбір
-        <span style="font-size:18px; line-height:1;">→</span>
-      </button>
-      <p style="margin-top: 32px; font-size: 14px; color: var(--text-muted);">
-        Залишилось <strong style="color: var(--accent);" id="spots-2">37</strong> з 50 місць
-      </p>
-    </div>
+    <h2>Якщо ти прочитав до кінця — <em>ти знаєш</em>, навіщо тобі це</h2>
+    <p>90 хвилин, які можуть повернути тобі зруйнований контакт із самим собою.</p>
+    <button class="btn btn-primary" onclick="openModal()">Зареєструватись на розбір →</button>
   </div>
 </section>
 
@@ -1478,138 +240,160 @@
   </div>
 </footer>
 
-<!-- ====== MODAL ====== -->
+<!-- ====== MODAL (ФОРМА) ====== -->
 <div class="modal-overlay" id="modal" onclick="if(event.target===this) closeModal()">
   <div class="modal" id="modalContent">
     <button class="modal-close" onclick="closeModal()" aria-label="Закрити">×</button>
 
-    <div id="form-view">
-      <h3>Реєстрація на відкритий розбір</h3>
-      <p class="modal-sub">90 хвилин у Zoom · Безкоштовно. Заповни форму — і ти в списку. Дату і посилання надішлемо тобі особисто.</p>
+    <h3>Реєстрація на відкритий розбір</h3>
+    <p class="modal-sub">90 хвилин у Zoom. Заповни форму — і ти в списку.</p>
 
-      <form id="signupForm" onsubmit="handleSubmit(event)">
-        <div class="form-group">
-          <label class="form-label" for="name">Як тебе звати?</label>
-          <input type="text" id="name" name="name" class="form-input" required placeholder="Ім'я">
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="contact">Telegram або email</label>
-          <input type="text" id="contact" name="contact" class="form-input" required placeholder="@username або email">
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="request">Коротко опиши свій запит — у 1-2 реченнях</label>
-          <textarea id="request" name="request" class="form-textarea" required placeholder="Що зараз бісить, не клеїться, не дає спокою? Без літератури, як є."></textarea>
-        </div>
-
-        <div class="form-checkbox-row">
-          <input type="checkbox" id="wantReview" name="wantReview" class="form-checkbox">
-          <label for="wantReview" class="form-checkbox-label">Хочу потрапити на публічний розбір (2 учасники зі своїм запитом отримають живий розбір на ефірі)</label>
-        </div>
-
-        <button type="submit" class="btn btn-primary form-submit">
-          Зареєструватись →
-        </button>
-      </form>
-    </div>
-
-    <div id="success-view" style="display:none;">
-      <div class="modal-success">
-        <div class="modal-success-icon">✓</div>
-        <h3>Готово. Ти в списку.</h3>
-        <p>Зараз тебе перенаправить у Telegram-бота — там ти отримаєш шаблон IKIGAI і всі деталі ефіру. Якщо браузер не відкриє автоматично — натисни кнопку нижче.</p>
-        <a href="https://t.me/YOUR_BOT_USERNAME?start=ikigai_signup" class="btn btn-primary" id="botLink">
-          Перейти в Telegram-бота →
-        </a>
+    <form id="signupForm" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label class="form-label" for="name">Як тебе звати?</label>
+        <input type="text" id="name" name="name" class="form-input" required placeholder="Ім'я" pattern="^[^0-9]+$" title="Ім'я не може містити цифри">
       </div>
-    </div>
+
+      <div class="form-group">
+        <label class="form-label" for="phone">Ваш телефон</label>
+        <input type="tel" id="phone" name="phone" class="form-input" required>
+        <div id="phone-error" class="form-error">Невірний формат номера</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="request">Коротко опиши свій запит</label>
+        <textarea id="request" name="request" class="form-textarea" required placeholder="Що зараз бісить, не клеїться?"></textarea>
+      </div>
+
+      <div class="form-checkbox-row">
+        <input type="checkbox" id="wantReview" name="wantReview" class="form-checkbox">
+        <label for="wantReview" class="form-checkbox-label">Хочу потрапити на публічний розбір</label>
+      </div>
+
+      <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%; margin-top: 12px;">Зареєструватись →</button>
+    </form>
   </div>
 </div>
 
+<!-- Скрипти бібліотеки Intl-Tel-Input -->
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+
 <script>
-  // === MODAL ===
+  // 1. НАЛАШТУВАННЯ ТЕЛЕФОНУ І GEO-IP
+  const phoneInput = document.querySelector("#phone");
+  const phoneError = document.querySelector("#phone-error");
+  
+  const iti = window.intlTelInput(phoneInput, {
+    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+    separateDialCode: true,
+    excludeCountries: ["ru", "by"], // Блок РУ і БІЛОРУСЬ
+    initialCountry: "auto",
+    geoIpLookup: function(callback) {
+      fetch("https://get.geojs.io/v1/ip/country.json")
+        .then(res => res.json())
+        .then(data => callback(data.country.toLowerCase()))
+        .catch(() => callback("ua"));
+    }
+  });
+
+  // Очищення помилки при вводі
+  phoneInput.addEventListener("input", () => {
+    phoneInput.classList.remove("input-error");
+    phoneError.style.display = "none";
+  });
+
+  // Валідація імені (заборона цифр під час вводу)
+  document.getElementById("name").addEventListener("input", function() {
+    this.value = this.value.replace(/[0-9]/g, '');
+  });
+
+  // 2. UTM-МІТКИ
+  function getUTMs() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      utm_content: params.get('utm_content') || '',
+      utm_term: params.get('utm_term') || ''
+    };
+  }
+
+  // 3. РОБОТА МОДАЛКИ
   function openModal() {
     document.getElementById('modal').classList.add('active');
     document.body.style.overflow = 'hidden';
+    // Тригер Пікселя
+    if(typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
   }
 
   function closeModal() {
     document.getElementById('modal').classList.remove('active');
     document.body.style.overflow = '';
-    // Reset to form view
-    setTimeout(() => {
-      document.getElementById('form-view').style.display = 'block';
-      document.getElementById('success-view').style.display = 'none';
-      document.getElementById('signupForm').reset();
-    }, 300);
   }
 
-  // === FORM SUBMIT ===
+  // 4. ВІДПРАВКА ДАНИХ ТА РЕДИРЕКТ
   async function handleSubmit(e) {
     e.preventDefault();
+    
+    // Валідація телефону
+    if (!iti.isValidNumber()) {
+      phoneInput.classList.add("input-error");
+      phoneError.style.display = "block";
+      return;
+    }
+
     const form = e.target;
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
+    const submitBtn = document.getElementById('submitBtn');
     submitBtn.innerHTML = 'Відправляємо...';
     submitBtn.disabled = true;
 
+    // Збираємо дані
+    const utms = getUTMs();
     const data = {
       name: form.name.value,
-      contact: form.contact.value,
+      phone: iti.getNumber(),
       request: form.request.value,
-      wantReview: form.wantReview.checked,
-      timestamp: new Date().toISOString()
+      wantReview: form.wantReview.checked ? "Так" : "Ні",
+      date: new Date().toLocaleString("uk-UA"),
+      ...utms
     };
 
     try {
-      const WEBHOOK_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
-
-      if (!WEBHOOK_URL.includes('YOUR_DEPLOYMENT_ID')) {
-        await fetch(WEBHOOK_URL, {
+      // ===== СЮДИ ВСТАВИТИ URL ВІД GOOGLE APPS SCRIPT =====
+      const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_WEBHOOK';
+      
+      if (GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_SCRIPT_WEBHOOK') {
+        await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
-      } else {
-        const existing = JSON.parse(localStorage.getItem('signups') || '[]');
-        existing.push(data);
-        localStorage.setItem('signups', JSON.stringify(existing));
-        console.log('Збережено локально:', data);
       }
 
-      document.getElementById('form-view').style.display = 'none';
-      document.getElementById('success-view').style.display = 'block';
-
-      setTimeout(() => {
-        window.location.href = document.getElementById('botLink').href;
-      }, 3000);
+      // Редирект на сторінку подяки (з передачею UTM)
+      const redirectUrl = new URL('thanks.html', window.location.origin + window.location.pathname);
+      Object.keys(utms).forEach(key => {
+        if(utms[key]) redirectUrl.searchParams.append(key, utms[key]);
+      });
+      
+      window.location.href = redirectUrl.toString();
 
     } catch (err) {
-      console.error('Помилка:', err);
-      submitBtn.innerHTML = originalText;
+      alert('Помилка відправки. Спробуйте ще раз.');
+      submitBtn.innerHTML = 'Зареєструватись →';
       submitBtn.disabled = false;
-      alert('Щось пішло не так. Спробуй ще раз або напиши IKIGAI у директ @vova.win');
     }
   }
 
-  // === SCROLL REVEAL ===
+  // Анімації при скролі
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
-
+  }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // === ESC KEY CLOSES MODAL ===
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
 </script>
-
 </body>
 </html>

@@ -1469,9 +1469,10 @@ fbq('track', 'PageView');
     submitBtn.innerHTML = 'Відправляємо...';
     submitBtn.disabled = true;
 
-    // Збираємо дані
+// Збираємо дані
     const utms = getUTMs();
     const data = {
+      source: 'group_session', // <--- ОСЬ ЦЕЙ РЯДОК РОБИТЬ МАГІЮ
       name: form.name.value,
       phone: iti.getNumber(),
       request: form.request.value,

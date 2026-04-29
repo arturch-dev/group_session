@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дякуємо за реєстрацію! — Володимир Гаврилюк</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'YOUR_PIXEL_ID'); // ЗАМІНИТИ НА СВІЙ ID ПІКСЕЛЯ
+fbq('track', 'PageView');
+fbq('track', 'Lead'); // ТРИГЕР ЛІДА ДЛЯ СТОРІНКИ ПОДЯКИ
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  :root {
+    --bg-deep: #0E0B08;
+    --bg-card: #221A14;
+    --text-primary: #F5EDE0;
+    --text-secondary: #C9BFAE;
+    --accent: #E8804A;
+    --hairline-strong: rgba(245, 237, 224, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Manrope', -apple-system, sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+  }
+
+  /* Текстура фону, як на головній */
+  body::before {
+    content: ''; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.95 0 0 0 0 0.85 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.06; mix-blend-mode: overlay;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--hairline-strong);
+    border-radius: 8px;
+    padding: 60px 40px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    animation: slideUp 0.5s ease forwards;
+  }
+
+  .icon {
+    width: 72px; height: 72px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-size: 32px;
+    margin: 0 auto 24px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 18px 36px;
+    background: var(--accent);
+    color: var(--bg-deep);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: 0.3s;
+    width: 100%;
+    font-size: 15px;
+  }
+
+  .btn:hover { background: #F08F58; transform: translateY(-2px); }
+
+  @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="icon">✓</div>
+    <h1>Готово. Ти в списку.</h1>
+    <p>Натисни кнопку нижче, щоб перейти в Telegram-бота. Там ти отримаєш шаблон IKIGAI і всі деталі ефіру.</p>
+    
+    <!-- ПОСИЛАННЯ НА ТВОГО БОТА -->
+    <a href="https://t.me/vova_win_bot?start=69f1e76858e5abf31a07bc4b" class="btn">
+      Перейти в Telegram-бота →
+    </a>
+  </div>
+
+  <script>
+    // Автоматично відкриваємо бота через 3 секунди, якщо людина не натиснула сама
+    setTimeout(() => {
+      window.location.href = "https://t.me/vova_win_bot?start=69f1e76858e5abf31a07bc4b";
+    }, 3000);
+  </script>
+
+</body>
+</html>
